@@ -46,28 +46,32 @@ struct timer_record* query_user()
     tm_tmp = localtime(&timer);
     
     the_record = (struct timer_record*)malloc(sizeof(struct timer_record));
-    memset(the_record, 0, sizeof(struct timer_record));
-    
-    /* starttime */
-    print_string("Please enter the start hour [0-23] > ");
-    tm_tmp->tm_hour = get_input_digit();
-    print_string("Please enter the start minute [0-59] > ");
-    tm_tmp->tm_min = get_input_digit();
-    
-    the_record->starttime = mktime(tm_tmp);
 
-    /* endtime */
-    print_string("\nPlease enter the end hour [0-23] > ");
-    tm_tmp->tm_hour = get_input_digit();
-    print_string("\nPlease enter the end minute [0-59] > ");
-    tm_tmp->tm_min = get_input_digit();
+    if ( the_record )
+    {
+        memset(the_record, 0, sizeof(struct timer_record));
+        
+        /* starttime */
+        print_string("Please enter the start hour [0-23] > ");
+        tm_tmp->tm_hour = get_input_digit();
+        print_string("Please enter the start minute [0-59] > ");
+        tm_tmp->tm_min = get_input_digit();
+        
+        the_record->starttime = mktime(tm_tmp);
+
+        /* endtime */
+        print_string("\nPlease enter the end hour [0-23] > ");
+        tm_tmp->tm_hour = get_input_digit();
+        print_string("\nPlease enter the end minute [0-59] > ");
+        tm_tmp->tm_min = get_input_digit();
+        
+        the_record->endtime = mktime(tm_tmp);
+
+        /* channel */
+        print_string("\nPlease enter the channel to record > ");
+        the_record->channel = get_input_digit();
+    }
     
-    the_record->endtime = mktime(tm_tmp);
-
-    /* channel */
-    print_string("\nPlease enter the channel to record > ");
-    the_record->channel = get_input_digit();
-
     return (the_record);
 }
 
